@@ -6,6 +6,7 @@
     <title>Placar da Sabedoria: Nangil vs Jotinha</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* Estilos Gerais */
         body {
             font-family: 'Press Start 2P', cursive;
             display: flex;
@@ -15,8 +16,9 @@
             background: linear-gradient(to right, #4CAF50, #8BC34A);
             color: #fff;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden; /* Evita scroll horizontal em telas pequenas */
             position: relative;
+            box-sizing: border-box; /* Garante que padding e border não adicionem largura */
         }
 
         body::before, body::after {
@@ -25,6 +27,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: pulse 4s infinite alternate;
+            z-index: -1; /* Garante que fiquem atrás do conteúdo */
         }
 
         body::before {
@@ -49,20 +52,23 @@
 
         .container {
             background-color: rgba(0, 0, 0, 0.7);
-            padding: 40px 60px;
+            padding: 30px; /* Reduzido para telas menores */
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             text-align: center;
             border: 5px solid #FFD700;
             position: relative;
-            max-width: 90%;
+            max-width: 95%; /* Permite que o container ocupe quase toda a largura */
+            width: 800px; /* Largura máxima para desktops */
+            box-sizing: border-box;
         }
 
         .header {
-            font-size: 2.5em;
+            font-size: 2.2em; /* Ajuste para telas menores */
             margin-bottom: 20px;
             color: #FFD700;
             text-shadow: 2px 2px #000;
+            word-break: break-word; /* Quebra palavras longas */
         }
 
         .score-board {
@@ -70,44 +76,49 @@
             justify-content: space-around;
             align-items: center;
             margin-bottom: 30px;
-            gap: 30px;
+            gap: 20px; /* Reduzido o espaço entre os times */
+            flex-wrap: wrap; /* Permite que os times quebrem linha */
         }
 
         .team {
             background-color: #333;
-            padding: 20px 30px;
+            padding: 15px 20px; /* Reduzido padding */
             border-radius: 15px;
             border: 3px solid #FFD700;
             flex: 1;
-            min-width: 200px;
+            min-width: 140px; /* Largura mínima para o time não ficar muito pequeno */
+            max-width: 250px; /* Limite para não crescer demais */
+            box-sizing: border-box;
         }
 
         .team-name {
-            font-size: 1.8em;
-            margin-bottom: 10px;
+            font-size: 1.5em; /* Ajuste para telas menores */
+            margin-bottom: 8px;
             color: #FFF;
+            word-break: break-word;
         }
 
         .score {
-            font-size: 4em;
+            font-size: 3.5em; /* Ajuste para telas menores */
             color: #FF4500;
             text-shadow: 3px 3px #000;
         }
 
         .justifications {
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            padding: 15px; /* Reduzido padding */
             border-radius: 10px;
             text-align: left;
-            margin-top: 30px;
+            margin-top: 20px;
             border: 2px dashed #FFD700;
         }
 
         .justifications h3 {
-            font-size: 1.5em;
+            font-size: 1.3em; /* Ajuste para telas menores */
             color: #FFD700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: center;
+            word-break: break-word;
         }
 
         .justifications ul {
@@ -116,15 +127,79 @@
         }
 
         .justifications li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            line-height: 1.5;
+            margin-bottom: 8px; /* Reduzido espaçamento */
+            font-size: 0.95em; /* Ajuste para telas menores */
+            line-height: 1.4;
+            word-wrap: break-word; /* Garante que o texto longo se ajuste */
         }
 
         .justifications li::before {
             content: '⚽ ';
             color: #FF4500;
-            margin-right: 8px;
+            margin-right: 5px; /* Ajuste de espaçamento */
+        }
+
+        /* --- Media Queries para Responsividade --- */
+
+        /* Para telas menores que 600px (celulares em modo retrato) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            .header {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+
+            .score-board {
+                flex-direction: column; /* Coloca os times um abaixo do outro */
+                gap: 15px;
+            }
+
+            .team {
+                width: 100%; /* Faz o time ocupar a largura total disponível */
+                max-width: 300px; /* Limite para não ficar muito largo em alguns tablets */
+                padding: 15px;
+            }
+
+            .team-name {
+                font-size: 1.3em;
+            }
+
+            .score {
+                font-size: 3em;
+            }
+
+            .justifications {
+                padding: 10px;
+                margin-top: 15px;
+            }
+
+            .justifications h3 {
+                font-size: 1.2em;
+            }
+
+            .justifications li {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Para telas menores que 400px (celulares muito pequenos) */
+        @media (max-width: 400px) {
+            .header {
+                font-size: 1.5em;
+            }
+            .score {
+                font-size: 2.5em;
+            }
+            .team-name {
+                font-size: 1.1em;
+            }
+            .justifications li {
+                font-size: 0.85em;
+            }
         }
     </style>
 
